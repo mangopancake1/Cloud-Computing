@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { createNote } from "../utils/api";
 
 const AddPost = () => {
   const [title, setTitle] = useState("");
@@ -11,10 +11,7 @@ const AddPost = () => {
   const savePost = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5005/notes", {
-        title,
-        content,
-      });
+      await createNote({ title, content });
       navigate("/");
     } catch (error) {
       console.error("Error saving post:", error);
