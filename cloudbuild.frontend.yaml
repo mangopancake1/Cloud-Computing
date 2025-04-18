@@ -1,13 +1,25 @@
 steps:
-  # Step 1: Deploy langsung ke App Engine tanpa membangun Docker image
-  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-    entrypoint: gcloud
-    args:
-      - app
-      - deploy
-      - app.yaml
-      - '--quiet'
-    dir: 'frontend'  # Ganti dengan direktori frontend yang berisi app.yaml dan file HTML kamu
+  # Step 1: Install dependencies
+  - name: "gcr.io/cloud-builders/npm"
+    args: ["ci"]
+    dir: "frontend"
+    volumes:
+      - name: "npm-cache"
+        path: /root/.npm
+
+  # Step 2: Build frontend
+  - name: "gcr.io/cloud-builders/npm"
+    args: ["run", "build"]
+    dir: "frontend"
+    volumes:
+      - name: "npm-cache"
+        path: /root/.npm
+
+   # Step 3: Deploy ke App Engine
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+    args: ["gcloud", "app", "deploy", "--quiet"]
+    dir: "frontend"
+
 
 options:
-  logging: CLOUD_LOGGING_ONLY  # Opsional: hanya mencatat log ke Google Cloud Logging
+  logging: CLOUD_LOGGING_ONLY
