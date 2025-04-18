@@ -11,8 +11,8 @@ const PostList = () => {
 
   const getPosts = async () => {
     try {
-      const data = await getAllNotes();
-      setPosts(data);
+      const response = await axios.get(`${BASE_URL}/notes`);
+      setPosts(response.data);
     } catch (error) {
       console.log("Error fetching posts:", error);
     }
@@ -20,7 +20,7 @@ const PostList = () => {
 
   const deletePost = async (id) => {
     try {
-      await deleteNote(id);
+      await axios.delete(`${BASE_URL}/notes/${id}`);
       getPosts();
     } catch (error) {
       console.log("Error deleting post:", error);

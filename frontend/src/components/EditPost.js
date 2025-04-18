@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { getNoteById, updateNote } from "../utils/api";
 
 const EditPost = () => {
   const [title, setTitle] = useState("");
@@ -15,7 +14,10 @@ const EditPost = () => {
   const updatePost = async (e) => {
     e.preventDefault();
     try {
-      await updateNote(id, { title, content });
+      await axios.put(`${BASE_URL}/notes/${id}`, {
+        title,
+        content,
+      });
       navigate("/");
     } catch (error) {
       console.log("Error updating post:", error);
@@ -24,7 +26,7 @@ const EditPost = () => {
 
   const getPostById = async () => {
     try {
-      const response = await getNoteById(id);
+      const response = await axios.get(`${BASE_URL}/notes/${id}`);
       setTitle(response.data.title);
       setContent(response.data.content);
     } catch (error) {
