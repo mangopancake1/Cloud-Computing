@@ -1,0 +1,26 @@
+### Ambil semua catatan
+GET http://localhost:5005/notes
+
+### Ambil satu catatan berdasarkan ID
+GET http://localhost:5005/notes/1
+
+### Tambah catatan baru
+POST http://localhost:5005/notes
+Content-Type: application/json
+
+{
+    "title": "Belajar Express.js2",
+    "content": "Hari ini saya belajar tentang Express.js di Node.js."
+}
+
+### Update catatan berdasarkan ID
+PATCH http://localhost:5005/notes/11
+Content-Type: application/json
+
+{
+    "title": "Belajar Express.js (Update)",
+    "content": "Hari ini saya menambahkan middleware ke dalam proyek Express.js."
+}
+
+### Hapus catatan berdasarkan ID
+DELETE http://localhost:5005/notes/11
