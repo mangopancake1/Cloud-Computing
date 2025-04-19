@@ -12,10 +12,7 @@ const AddPost = () => {
   const savePost = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(`${BASE_URL}/notes`, {
-        title,
-        content,
-      });
+      await createNote({ title, content })
       navigate("/");
     } catch (error) {
       console.error("Error saving post:", error);

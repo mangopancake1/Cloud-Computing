@@ -16,10 +16,7 @@ const EditPost = () => {
   const updatePost = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`${BASE_URL}/notes/${id}`, {
-        title,
-        content,
-      });
+      await updateNote(id, { title, content });
       navigate("/");
     } catch (error) {
       console.log("Error updating post:", error);
@@ -28,8 +25,7 @@ const EditPost = () => {
 
   const getPostById = async () => {
     try {
-      const response = await axios.get(`${BASE_URL}/notes/${id}`);
-      setTitle(response.data.title);
+      const response = getNote(id); setTitle(response.data.title); 
       setContent(response.data.content);
     } catch (error) {
       console.log("Error fetching post data:", error);

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { BASE_URL } from "../utils/api";
+import { BASE_URL, deleteNote } from "../utils/api";
 
 const PostList = () => {
   const [posts, setPosts] = useState([]);
@@ -12,7 +12,7 @@ const PostList = () => {
 
   const getPosts = async () => {
     try {
-      const response = await axios.get(`${BASE_URL}/notes`);
+      const response = await getNotes();
       setPosts(response.data);
     } catch (error) {
       console.log("Error fetching posts:", error);
@@ -21,7 +21,7 @@ const PostList = () => {
 
   const deletePost = async (id) => {
     try {
-      await axios.delete(`${BASE_URL}/notes/${id}`);
+      await deleteNote(id);
       getPosts();
     } catch (error) {
       console.log("Error deleting post:", error);
