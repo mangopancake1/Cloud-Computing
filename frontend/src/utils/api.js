@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export const BASE_URL = "https://notes-backend141-637581838712.us-central1.run.app/notes";
 
 export const getNotes = async () => await axios.get(BASE_URL);

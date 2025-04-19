@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import { BASE_URL } from "../utils/api";
+import { getNote, updateNote } from "../utils/api";
 
 const EditPost = () => {
   const [title, setTitle] = useState("");
