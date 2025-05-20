@@ -3,7 +3,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import db from "./config/Database.js";
 import NoteRoute from "./routes/NoteRoutes.js";
-import UserRoute from "./routes/UserRoutes.js";
+import UserRoute from "./routes/userRoute.js";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 5005;
 
 // ✅ Konfigurasi CORS
 const allowedOrigins = [
-  "https://notes-fe0141-dot-c-13-451813.uc.r.appspot.com/",
+  "https://notes-fe0141-dot-c-13-451813.uc.r.appspot.com",
 ];
 
 app.use(

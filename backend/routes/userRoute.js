@@ -7,7 +7,7 @@ import {
   deleteUser,
   loginHandler,
   logout,
-} from "../controller/userController.js";
+} from "../controllers/userController.js";
 import { verifyToken } from "../middleware/verifytoken.js";
 
 const router = express.Router();
