@@ -5,21 +5,21 @@
 ### ====================================
 
 # 🔍 Get All Users
-GET http://localhost:5005/users
+GET http://localhost:5000/users
 Content-Type: application/json
 Authorization: {{token}}
 
 ###
 
 # 👤 Get User by ID
-GET http://localhost:5005/users/1
+GET http://localhost:5000/users/1
 Content-Type: application/json
 Authorization: {{token}}
 
 ###
 
 # ➕ Create User (Register)
-POST http://localhost:5005/create-users
+POST http://localhost:5000/create-users
 Content-Type: application/json
 
 {
@@ -31,7 +31,7 @@ Content-Type: application/json
 ###
 
 # ✏️ Update User
-PUT http://localhost:5005/update-users/1
+PUT http://localhost:5000/update-users/1
 Content-Type: application/json
 Authorization: {{token}}
 
@@ -44,14 +44,14 @@ Authorization: {{token}}
 ###
 
 # ❌ Delete User
-DELETE http://localhost:5005/delete-users/1
+DELETE http://localhost:5000/delete-users/1
 Content-Type: application/json
 Authorization: {{token}}
 
 ###
 
 # 🔑 Login User
-POST http://localhost:5005/login
+POST http://localhost:5000/login
 Content-Type: application/json
 
 {
@@ -62,7 +62,7 @@ Content-Type: application/json
 ###
 
 # 🚪 Logout User
-POST http://localhost:5005/logout
+POST http://localhost:5000/logout
 Authorization: {{token}}
 
 ###
@@ -72,19 +72,19 @@ Authorization: {{token}}
 ### ====================================
 
 # 📄 Get All Notes
-GET http://localhost:5005/notes
+GET http://localhost:5000/notes
 Authorization: {{token}}
 
 ###
 
 # 📄 Get Note by ID
-GET http://localhost:5005/notes/1
+GET http://localhost:5000/notes/1
 Authorization: {{token}}
 
 ###
 
 # ➕ Create New Note
-POST http://localhost:5005/notes
+POST http://localhost:5000/notes
 Content-Type: application/json
 Authorization: {{token}}
 
@@ -96,7 +96,7 @@ Authorization: {{token}}
 ###
 
 # ✏️ Update Note by ID
-PATCH http://localhost:5005/notes/11
+PATCH http://localhost:5000/notes/11
 Content-Type: application/json
 Authorization: {{token}}
 
@@ -108,5 +108,5 @@ Authorization: {{token}}
 ###
 
 # ❌ Delete Note by ID
-DELETE http://localhost:5005/notes/11
+DELETE http://localhost:5000/notes/11
 Authorization: {{token}}
