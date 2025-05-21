@@ -8,7 +8,8 @@ import dotenv from "dotenv";
 
 dotenv.config();
 const app = express();
-const PORT = process.env.PORT || 5005;
+const PORT = process.env.PORT;
+
 
 
 // ✅ Konfigurasi CORS
@@ -33,8 +34,6 @@ app.use(NoteRoute);
 app.use(UserRoute);
 
 
-app.listen(PORT, () => console.log(`Server running at http://localhost:${PORT}`));
-
 (async () => {
     try {
         await db.sync();
@@ -44,3 +43,4 @@ app.listen(PORT, () => console.log(`Server running at http://localhost:${PORT}`)
     }
 })();
 
+app.listen(PORT, () => console.log(`Server running at http://localhost:${PORT}`));
