@@ -8,16 +8,11 @@ import dotenv from "dotenv";
 
 dotenv.config();
 const app = express();
+const PORT = process.env.PORT || 5005;
 
-// ⚠️ HARUS pakai process.env.PORT TANPA fallback!
-const PORT = process.env.PORT;
-if (!PORT) {
-  console.error("❌ PORT is not defined in environment");
-  process.exit(1);
-}
-
+// ✅ Konfigurasi CORS
 const allowedOrigins = [
-  "https://notes-fe0141-dot-c-13-451813.uc.r.appspot.com",
+  "",
 ];
 
 app.use(
@@ -35,16 +30,16 @@ app.use(express.json());
 app.use(NoteRoute);
 app.use(UserRoute);
 
-// 🔄 Jalankan hanya jika DB berhasil sinkron
+// ✅ Pindahkan app.listen() ke dalam async function
 (async () => {
   try {
     await db.sync();
-    console.log("✅ Database synced");
+    console.log("Database synced successfully.");
     app.listen(PORT, () => {
-      console.log(`🚀 Server running on port ${PORT}`);
+    console.log(` Server berjalan di http://localhost:${PORT}`)
     });
-  } catch (err) {
-    console.error("❌ Failed to sync DB:", err);
-    process.exit(1);
+  } catch (error) {
+    console.error("Failed to sync database:", error);
+    process.exit(1); // 
   }
 })();
