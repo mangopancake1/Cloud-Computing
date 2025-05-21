@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 5005;
 
 // ✅ Konfigurasi CORS
 const allowedOrigins = [
-  "https://notes-fe0141-dot-c-13-451813.uc.r.appspot.com",
+  "",
 ];
 
 app.use(
@@ -35,8 +35,8 @@ app.use(UserRoute);
   try {
     await db.sync();
     console.log("Database synced successfully.");
-    app.listen(PORT, '0.0.0.0', () => {
-    console.log(`Server running at http://0.0.0.0:${PORT}`);
+    app.listen(PORT, () => {
+    console.log(` Server berjalan di http://localhost:${PORT}`)
     });
   } catch (error) {
     console.error("Failed to sync database:", error);
