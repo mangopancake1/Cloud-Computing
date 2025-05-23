@@ -3,6 +3,11 @@ import db from "../config/Database.js";
 
 const User = db.define(
   "users",{ 
+    id: {
+    type: Sequelize.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+    },
     username: {
       type: Sequelize.STRING,
       allowNull: false,
