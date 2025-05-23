@@ -6,7 +6,7 @@ import {
     updateNote, 
     deleteNote 
 } from "../controllers/NoteController.js";
-import { verifyToken } from "../middleware/verifytoken.js";
+import { verifyToken } from "../middleware/verifyToken.js";
 
 const router = express.Router();
 
