@@ -1,54 +1,88 @@
 import Note from "../models/NoteModel.js";
 
-
+// ✅ Ambil semua note milik user yang login
 export const getNotes = async (req, res) => {
   try {
-    const notes = await Note.findAll();
+    const notes = await Note.findAll({
+      where: {
+        userId: req.user.id,
+      },
+    });
     res.json(notes);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
-
+// ✅ Ambil satu note milik user yang login
 export const getNoteById = async (req, res) => {
   try {
-    const note = await Note.findByPk(req.params.id);
-    if (!note) return res.status(404).json({ message: "Note tidak ditemukan" });
+    const note = await Note.findOne({
+      where: {
+        id: req.params.id,
+        userId: req.user.id,
+      },
+    });
+
+    if (!note) return res.status(404).json({ message: "Note tidak ditemukan atau bukan milik Anda" });
     res.json(note);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
-
+// ✅ Buat note baru yang terkait user login
 export const createNote = async (req, res) => {
   try {
-    await Note.create(req.body);
-    res.status(201).json({ message: "Note berhasil dibuat" });
+    const { title, content } = req.body;
+    if (!title || !content) {
+      return res.status(400).json({ message: "Title dan content wajib diisi" });
+    }
+
+    const newNote = await Note.create({
+      title,
+      content,
+      userId: req.user.id,
+    });
+
+    res.status(201).json({ message: "Note berhasil dibuat", data: newNote });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
-
+// ✅ Update note milik user
 export const updateNote = async (req, res) => {
   try {
-    const note = await Note.findByPk(req.params.id);
-    if (!note) return res.status(404).json({ message: "Note tidak ditemukan" });
+    const note = await Note.findOne({
+      where: {
+        id: req.params.id,
+        userId: req.user.id,
+      },
+    });
 
-    await note.update(req.body);
-    res.json({ message: "Note berhasil diperbarui" });
+    if (!note) return res.status(404).json({ message: "Note tidak ditemukan atau bukan milik Anda" });
+
+    const { title, content } = req.body;
+    await note.update({ title, content });
+
+    res.json({ message: "Note berhasil diperbarui", data: note });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
-
+// ✅ Hapus note milik user
 export const deleteNote = async (req, res) => {
   try {
-    const note = await Note.findByPk(req.params.id);
-    if (!note) return res.status(404).json({ message: "Note tidak ditemukan" });
+    const note = await Note.findOne({
+      where: {
+        id: req.params.id,
+        userId: req.user.id,
+      },
+    });
+
+    if (!note) return res.status(404).json({ message: "Note tidak ditemukan atau bukan milik Anda" });
 
     await note.destroy();
     res.json({ message: "Note berhasil dihapus" });
