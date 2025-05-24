@@ -3,9 +3,13 @@ import Note from "../models/NoteModel.js";
 // ✅ Ambil semua note milik user yang login
 export const getNotes = async (req, res) => {
   try {
-    const note = await Note.findAll();
-    res.json(note);
+    console.log("User from token:", req.user); // <- pastikan ada user
+    const notes = await Note.findAll({
+      where: { userId: req.user.userId }
+    });
+    res.json(notes);
   } catch (error) {
+    console.error("Get notes error:", error.message);
     res.status(500).json({ message: error.message });
   }
 };
