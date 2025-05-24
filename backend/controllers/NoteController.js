@@ -3,12 +3,8 @@ import Note from "../models/NoteModel.js";
 // ✅ Ambil semua note milik user yang login
 export const getNotes = async (req, res) => {
   try {
-    const notes = await Note.findAll({
-      where: {
-        userId: req.user.id,
-      },
-    });
-    res.json(notes);
+    const note = await Note.findAll();
+    res.json(note);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -17,14 +13,8 @@ export const getNotes = async (req, res) => {
 // ✅ Ambil satu note milik user yang login
 export const getNoteById = async (req, res) => {
   try {
-    const note = await Note.findOne({
-      where: {
-        id: req.params.id,
-        userId: req.user.id,
-      },
-    });
-
-    if (!note) return res.status(404).json({ message: "Note tidak ditemukan atau bukan milik Anda" });
+    const note = await Note.findByPk(req.params.id);
+    if (!note) return res.status(404).json({ message: "Note not found" });
     res.json(note);
   } catch (error) {
     res.status(500).json({ message: error.message });
