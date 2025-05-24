@@ -31,10 +31,6 @@ app.use(express.json());
 app.use(NoteRoute);
 app.use(UserRoute);
 
-app.use((err, req, res, next) => {
-  console.error("Unhandled Error:", err.stack);
-  res.status(500).json({ message: "Internal Server Error" });
-});
 
 // ✅ Pindahkan app.listen() ke dalam async function
 (async () => {
