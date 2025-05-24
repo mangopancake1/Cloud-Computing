@@ -1,11 +1,9 @@
 import Note from "../models/NoteModel.js";
 
-// ✅ Ambil semua note milik user yang login
+// Get All Notes
 export const getNotes = async (req, res) => {
   try {
-    const note = await Note.findAll({
-      where: { userId: req.user.id },
-  });
+    const note = await Note.findAll();
     res.json(note);
   } catch (error) {
     res.status(500).json({ message: error.message });

@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import db from "./config/Database.js";
+import { db } from "./models/index.js"; 
 import NoteRoute from "./routes/NoteRoutes.js";
 import UserRoute from "./routes/userRoute.js";
 import dotenv from "dotenv";
