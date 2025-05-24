@@ -10,9 +10,9 @@ export const getNotes = async (req, res) => {
   }
 };
 
-// ✅ Ambil satu note milik user yang login
+// Get Note by ID
 export const getNoteById = async (req, res) => {
-   try {
+  try {
     const note = await Note.findByPk(req.params.id);
     if (!note) return res.status(404).json({ message: "Note not found" });
     res.json(note);
