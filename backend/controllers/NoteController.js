@@ -3,20 +3,16 @@ import Note from "../models/NoteModel.js";
 // ✅ Ambil semua note milik user yang login
 export const getNotes = async (req, res) => {
   try {
-    console.log("User from token:", req.user); // <- pastikan ada user
-    const notes = await Note.findAll({
-      where: { userId: req.user.userId }
-    });
-    res.json(notes);
+    const note = await Note.findAll();
+    res.json(note);
   } catch (error) {
-    console.error("Get notes error:", error.message);
     res.status(500).json({ message: error.message });
   }
 };
 
 // ✅ Ambil satu note milik user yang login
 export const getNoteById = async (req, res) => {
-  try {
+   try {
     const note = await Note.findByPk(req.params.id);
     if (!note) return res.status(404).json({ message: "Note not found" });
     res.json(note);
