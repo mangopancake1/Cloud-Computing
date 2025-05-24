@@ -31,16 +31,21 @@ app.use(express.json());
 app.use(NoteRoute);
 app.use(UserRoute);
 
+app.use((err, req, res, next) => {
+  console.error("Unhandled Error:", err.stack);
+  res.status(500).json({ message: "Internal Server Error" });
+});
+
 // ✅ Pindahkan app.listen() ke dalam async function
 (async () => {
   try {
     await db.sync();
     console.log("Database synced successfully.");
     app.listen(PORT, () => {
-    console.log(` Server berjalan di http://localhost:${PORT}`)
+      console.log(`Server berjalan di http://localhost:${PORT}`);
     });
   } catch (error) {
     console.error("Failed to sync database:", error);
-    process.exit(1); // 
+    process.exit(1);
   }
 })();
