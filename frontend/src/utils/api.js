@@ -15,3 +15,8 @@ export const updateNote = async (id, note) => await axios.put(`${BASE_URL}/${id}
 
 // Delete note
 export const deleteNote = async (id) => await axios.delete(`${BASE_URL}/${id}`);
+
+// Auth routes
+export const loginUser = async (user) => await axios.post("https://notes-backend141-637581838712.us-central1.run.app/login", user);
+
+export const registerUser = async (user) => await axios.post("https://notes-backend141-637581838712.us-central1.run.app/register", user);
