@@ -9,8 +9,9 @@ const EditPost = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    getPostById();
-  }, []);
+  getPostById();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, []);
 
   const updatePost = async (e) => {
     e.preventDefault();
@@ -24,7 +25,8 @@ const EditPost = () => {
 
   const getPostById = async () => {
     try {
-      const response = getNote(id); setTitle(response.data.title); 
+      const response = await getNote(id);
+      setTitle(response.data.title);
       setContent(response.data.content);
     } catch (error) {
       console.log("Error fetching post data:", error);
