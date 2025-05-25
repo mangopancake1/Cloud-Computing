@@ -42,6 +42,22 @@ const PostList = () => {
             backgroundColor: "#EAE2C6",
           }}
         >
+          <div className="has-text-right mb-4">
+            <button
+              className="button is-danger"
+              onClick={() => {
+                localStorage.removeItem("token");
+                window.location.href = "/";
+              }}
+              style={{
+                marginBottom: "10px",
+                fontWeight: "bold",
+              }}
+            >
+              Logout
+            </button>
+          </div>
+          
           <h1
             className="title has-text-centered is-size-1"
             style={{ color: "#27445D", fontWeight: "bold" }}
