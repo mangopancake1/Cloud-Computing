@@ -7,18 +7,18 @@ import RegisterForm from "./components/RegisterForm";
 import HomePage from "./components/HomePage";
 
 function App() {
-  const isAuthenticated = !!localStorage.getItem("token");
-
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Navigate to="/welcome" replace />} />  {/* Redirect */}
+        <Route path="/" element={<Navigate to="/welcome" replace />} />
         <Route path="/welcome" element={<HomePage />} />
         <Route path="/login" element={<LoginForm />} />
         <Route path="/register" element={<RegisterForm />} />
         <Route
           path="/notes"
-          element={isAuthenticated ? <PostList /> : <Navigate to="/" />}
+          element={
+            localStorage.getItem("token") ? <PostList /> : <Navigate to="/welcome" />
+          }
         />
         <Route path="/add" element={<AddPost />} />
         <Route path="/edit/:id" element={<EditPost />} />

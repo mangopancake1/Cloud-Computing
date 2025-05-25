@@ -47,7 +47,7 @@ const PostList = () => {
               className="button is-danger"
               onClick={() => {
                 localStorage.removeItem("token");
-                window.location.href = "/";
+                window.location.href = "/login";
               }}
               style={{
                 marginBottom: "10px",
@@ -57,7 +57,7 @@ const PostList = () => {
               Logout
             </button>
           </div>
-          
+
           <h1
             className="title has-text-centered is-size-1"
             style={{ color: "#27445D", fontWeight: "bold" }}
