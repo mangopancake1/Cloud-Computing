@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { registerUser } from "../utils/api";
 
 const RegisterForm = () => {
-  const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -12,7 +12,7 @@ const RegisterForm = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      await registerUser({ name, email, password });
+      await registerUser({ username, email, password });
       navigate("/login");
     } catch (error) {
       console.error("Registration failed:", error);
@@ -28,9 +28,9 @@ const RegisterForm = () => {
           {errorMessage && <div className="notification is-danger">{errorMessage}</div>}
           <form onSubmit={handleRegister}>
             <div className="field">
-              <label className="label">Name</label>
+              <label className="label">Username</label>
               <div className="control">
-                <input className="input" type="text" value={name} onChange={(e) => setName(e.target.value)} required />
+                <input className="input"type="text" value={username} onChange={(e) => setUsername(e.target.value)} required />
               </div>
             </div>
             <div className="field">
