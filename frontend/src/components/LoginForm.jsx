@@ -12,7 +12,8 @@ const LoginForm = () => {
   e.preventDefault();
   try {
     const response = await loginUser({ username, password });
-    console.log("Login response:", response); // ✅ Tambahin ini buat cek response
+    console.log("Login response:", response); 
+    console.log("Isi response.data:", response.data);
 
     // Pastikan key token sesuai
     localStorage.setItem("token", response.data.token); // Misal kalau ternyata bukan 'token', sesuaikan di sini
