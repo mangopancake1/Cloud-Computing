@@ -9,16 +9,20 @@ const LoginForm = () => {
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await loginUser({ username, password });
-      localStorage.setItem("token", response.data.token);
-      navigate("/notes");
-    } catch (error) {
-      console.error("Login failed:", error);
-      setErrorMessage("Invalid username or password.");
-    }
-  };
+  e.preventDefault();
+  try {
+    const response = await loginUser({ username, password });
+    console.log("Login response:", response); // ✅ Tambahin ini buat cek response
+
+    // Pastikan key token sesuai
+    localStorage.setItem("token", response.data.token); // Misal kalau ternyata bukan 'token', sesuaikan di sini
+
+    navigate("/notes");
+  } catch (error) {
+    console.error("Login failed:", error);
+    setErrorMessage("Invalid username or password.");
+  }
+};
 
   return (
     <div
