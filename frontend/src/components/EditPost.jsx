@@ -1,24 +1,37 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { createNote} from "../utils/api";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { getNote, updateNote } from "../utils/api";
 
-const AddPost = () => {
+const EditPost = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
+  const { id } = useParams();
 
-  const savePost = async (e) => {
+  useEffect(() => {
+  getPostById();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, []);
+
+  const updatePost = async (e) => {
     e.preventDefault();
     try {
-      await createNote({ title, content })
-      navigate("/");
+      await updateNote(id, { title, content });
+      navigate("/notes");
     } catch (error) {
-      console.error("Error saving post:", error);
-      setErrorMessage("Failed to save post. Please try again.");
+      console.log("Error updating post:", error);
     }
   };
 
+  const getPostById = async () => {
+    try {
+      const response = await getNote(id);
+      setTitle(response.data.title);
+      setContent(response.data.content);
+    } catch (error) {
+      console.log("Error fetching post data:", error);
+    }
+  };
 
   return (
     <div
@@ -26,9 +39,6 @@ const AddPost = () => {
       style={{ backgroundColor: "#A9B5DF", minHeight: "100vh", padding: "2rem" }}
     >
       <div className="column is-half">
-        {errorMessage && (
-          <div className="notification is-danger">{errorMessage}</div>
-        )}
         <div
           className="box"
           style={{
@@ -42,9 +52,9 @@ const AddPost = () => {
             className="title has-text-centered"
             style={{ color: "#27445D", fontWeight: "bold" }}
           >
-            Add New Note
+            Edit Note
           </h1>
-          <form onSubmit={savePost}>
+          <form onSubmit={updatePost}>
             <div className="field">
               <label className="label" style={{ color: "#27445D" }}>Title</label>
               <div className="control">
@@ -89,7 +99,7 @@ const AddPost = () => {
                 onMouseOver={(e) => (e.target.style.backgroundColor = "#1F354A")}
                 onMouseOut={(e) => (e.target.style.backgroundColor = "#27445D")}
               >
-                Save Note
+                Update Note
               </button>
             </div>
           </form>
@@ -99,4 +109,4 @@ const AddPost = () => {
   );
 };
 
-export default AddPost;
+export default EditPost;

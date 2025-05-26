@@ -12,6 +12,7 @@ const PostList = () => {
   const getPosts = async () => {
     try {
       const response = await getNotes();
+      console.log("getNotes response:", response);
       setPosts(response.data);
     } catch (error) {
       console.log("Error fetching posts:", error);
