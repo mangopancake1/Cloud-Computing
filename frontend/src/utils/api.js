@@ -1,22 +1,16 @@
-import axios from "axios";
+import api from "./auth";
 
-export const BASE_URL = "https://notes-backend141-637581838712.us-central1.run.app/notes";
+export const getNotes = () => api.get("/notes");
 
-export const getNotes = async () => await axios.get(BASE_URL);
+export const getNote = (id) => api.get(`/notes/${id}`);
 
-// Get note by ID
-export const getNote = async (id) => await axios.get(`${BASE_URL}/${id}`);
+export const createNote = (note) => api.post("/notes", note);
 
-// Create new note
-export const createNote = async (note) => await axios.post(BASE_URL, note);
+export const updateNote = (id, note) => api.put(`/notes/${id}`, note);
 
-// Update note
-export const updateNote = async (id, note) => await axios.put(`${BASE_URL}/${id}`, note);
-
-// Delete note
-export const deleteNote = async (id) => await axios.delete(`${BASE_URL}/${id}`);
+export const deleteNote = (id) => api.delete(`/notes/${id}`);
 
 // Auth routes
-export const loginUser = async (user) => await axios.post("https://notes-backend141-637581838712.us-central1.run.app/login", user);
+export const loginUser = (user) => api.post("/login", user);
 
-export const registerUser = async (user) => await axios.post("https://notes-backend141-637581838712.us-central1.run.app/create-users", user);
+export const registerUser = (user) => api.post("/create-users", user);
