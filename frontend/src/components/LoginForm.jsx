@@ -16,7 +16,7 @@ const LoginForm = () => {
     console.log("Isi response.data:", response.data);
 
     // Pastikan key token sesuai
-    localStorage.setItem("token", response.data.token); // Misal kalau ternyata bukan 'token', sesuaikan di sini
+    localStorage.setItem("token", response.data.accessToken);
 
     navigate("/notes");
   } catch (error) {
