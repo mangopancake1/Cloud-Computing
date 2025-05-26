@@ -1,8 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://notes-backend141-637581838712.us-central1.run.app", // atau URL backend kamu yang valid
-  withCredentials: true,
+  baseURL: "https://notes-backend141-637581838712.us-central1.run.app",
 });
 
 api.interceptors.request.use((config) => {
